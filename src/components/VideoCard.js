@@ -14,8 +14,16 @@ const VideoCard = ({ items }) => {
       <ul>
         <li className="font-bold py-2"> {title}</li>
         <li> {channelTitle}</li>
-        <li> {statistics.viewCount}Views</li>
+        <li> {statistics.viewCount} Views</li>
       </ul>
+    </div>
+  );
+};
+
+export const AdVideoCard = ({ items }) => {
+  return (
+    <div className="p-1 m-1 border border-red-800">
+      <VideoCard items={items} />
     </div>
   );
 };

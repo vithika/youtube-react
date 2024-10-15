@@ -1,9 +1,79 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
+import { YOUTUBE_SEARCH_API } from "../utils/constants";
+import { cacheResults } from "../utils/searchSlice";
 
 const Header = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSiggestions] = useState(true);
   const dispatch = useDispatch();
+  const searchCache = useSelector((store) => store.search);
+
+  /**
+   *  {
+   * "iphone":["iphone11","iphone14"]
+   * }
+   * searchQuery = iphone
+   *
+   */
+
+  //make an api call after every key press
+  // but if the difference between 2 API calls is < 200ms
+  // decline the API call
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchCache[searchQuery]) {
+        setSuggestions(searchCache[searchQuery]);
+      } else {
+        getSearchSuggestions();
+      }
+    }, 200);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchQuery]);
+
+  /**
+   *
+   * key - i
+   * - render the component
+   * - useEffect();
+   * start timer => make api call after 200ms
+   *
+   *
+   * key -ip
+   * - destroy the component(useEffect return method)
+   * - re-render the component
+   * - useEffect();
+   * - start timer => make api call after 200ms.
+   *
+   *
+   * setTimeout(200ms) - make an API call
+   *
+   *
+   *
+   *
+   */
+
+  const getSearchSuggestions = async () => {
+    const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+    const json = await data.json();
+
+    setSuggestions(json[1]);
+
+    // update cache
+
+    dispatch(
+      cacheResults({
+        [searchQuery]: json[1],
+      })
+    );
+  };
+
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
@@ -26,14 +96,31 @@ const Header = () => {
         </a>
       </div>
       <div className="my-8 py-2 col-span-10">
-        <input
-          className="w-6/12 px-3 text-center  rounded-l-full border border-gray-700"
-          type="text"
-          placeholder="Search for video"
-        ></input>
-        <button className="px-5 bg-gray-100 rounded-r-full border border-gray-700">
-          🔍
-        </button>
+        <div>
+          <input
+            className="w-6/12 px-3 text-center  rounded-l-full border border-gray-700"
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={() => setShowSiggestions(true)}
+            onBlur={() => setShowSiggestions(false)}
+            placeholder="Search for video"
+          ></input>
+          <button className="px-5 bg-gray-100 rounded-r-full border border-gray-700">
+            🔍
+          </button>
+        </div>
+        {showSuggestions && (
+          <div className="fixed absolute bg-white py-2 px-2 w-[37rem] shadow-lg rounded-lg border border-gray-100">
+            <ul>
+              {suggestions.map((s) => (
+                <li key={s} className="px-3  py-2 shadow-sm">
+                  🔍 {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
       <div className="col-span-1">
         <img

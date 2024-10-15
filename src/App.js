@@ -3,8 +3,7 @@ import Header from "./components/Header";
 import Body from "./components/Body";
 import { Provider } from "react-redux";
 import store from "./utils/store";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import Sidebar from "./components/Sidebar";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainContainer from "./components/MainContainer";
 import WatchPage from "./components/WatchPage";
 

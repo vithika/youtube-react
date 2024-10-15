@@ -13,7 +13,7 @@ const Sidebar = () => {
         </li>
         <li className="pl-3 py-1 font-thin"> 🃑 Shorts</li>
         <li className="pl-3 py-3 font-thin "> 🎬 Subcriptions</li>
-        <hr class="border-t-1 border-gray-300 " />
+        <hr className="border-t-1 border-gray-300 " />
       </ul>
       <ul className="p-3">
         <li className="pl-3 py-3 font-bold"> You ﹥</li>
@@ -21,7 +21,7 @@ const Sidebar = () => {
         <li className="pl-3 py-3 font-thin"> ▶️ Playlists</li>
         <li className="pl-3 py-3 font-thin"> 🕓 Watch later </li>
         <li className="pl-3 py-3 font-thin"> 👍🏻 Liked Videos</li>
-        <hr class="border-t-1 border-gray-300 " />
+        <hr className="border-t-1 border-gray-300 " />
       </ul>
       <ul className="p-3">
         <li className="pl-3 py-3 font-bold"> Explore </li>
@@ -34,21 +34,21 @@ const Sidebar = () => {
         <li className="pl-3 py-3 font-thin"> 🥼 Fashion & Beauty</li>
         <li className="pl-3 py-3 font-thin"> 💢 Podcasts</li>
         <li className="pl-3 py-3 font-thin"> 🏆 Sports</li>
-        <hr class="border-t-1 border-gray-300 " />
+        <hr className="border-t-1 border-gray-300 " />
       </ul>
       <ul className="p-3">
         <li className="pl-3 py-3 font-bold"> More from Youtube </li>
         <li className="pl-3 py-3 font-thin"> Youtube Premium</li>
         <li className="pl-3 py-3 font-thin"> Youtube Music</li>
         <li className="pl-3 py-3 font-thin"> Youtube Kids </li>
-        <hr class="border-t-1 border-gray-300 " />
+        <hr className="border-t-1 border-gray-300 " />
       </ul>
       <ul className="p-3">
         <li className="pl-3 py-3 font-thin"> Settings </li>
         <li className="pl-3 py-3 font-thin"> Report History</li>
         <li className="pl-3 py-3 font-thin"> ? Help</li>
         <li className="pl-3 py-3 font-thin"> Send Feedback </li>
-        <hr class="border-t-1 border-gray-300 " />
+        <hr className="border-t-1 border-gray-300 " />
       </ul>
     </div>
   );
